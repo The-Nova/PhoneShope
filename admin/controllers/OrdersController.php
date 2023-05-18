@@ -27,8 +27,10 @@
 			$id = isset($_GET["id"]) ? $_GET["id"] : 0;
 			//goi ham tu model de thuc hien
 			$data = $this->modelListOrderDetails($id);
+			$order = $this->modelGetOrders($id);
+            $customer = $this->modelGetCustomers($order->customer_id);
 			//load view
-			$this->loadView("OrderDetailView.php",["data"=>$data,"id"=>$id]);
+			$this->loadView("OrderDetailView.php",["data"=>$data,"id"=>$id,"order"=>$order,"customer"=>$customer]);
 		}
 
 		//danh sach cac product dang tim

@@ -76,6 +76,8 @@
             $optSale=$_POST["optradio"];
             $optAddress=$_POST["opt"];
             $address=$_POST["address"];
+			$note=$_POST["note"];
+			if($note=='') $note=0;
             foreach($dataProduct as $rows){
                 $sumprice+=($rows->price*$rows->quantity);
                 $saleprice+=($rows->price*$rows->discount/100);
@@ -90,8 +92,8 @@
 			//lay bien ket noi
 			$conn = Connection::getInstance();
             //them hoa don moi
-            $query = $conn->prepare("insert into orders set customer_id=:_customer_id,price=:_price,saleprice=:_saleprice,createdate=:_createdate");
-            $query->execute([":_customer_id"=>$customer_id,":_price"=>$sumprice,":_saleprice"=>$saleprice,":_createdate"=>$createdate]);
+            $query = $conn->prepare("insert into orders set customer_id=:_customer_id,price=:_price,saleprice=:_saleprice,note=:_note,createdate=:_createdate");
+            $query->execute([":_customer_id"=>$customer_id,":_price"=>$sumprice,":_saleprice"=>$saleprice,":_note"=>$note,":_createdate"=>$createdate]);
             $order_id=$conn->lastInsertId();
             foreach($dataProduct as $rows){
                 $type_id=$rows->type_id;
@@ -106,7 +108,7 @@
                 $query->execute([":_quantity"=>$quantity,":_id"=>$type_id]);
                 //xoa gio hang
                 $this->modelDelete($rows->id);
-                $_SESSION["success"]="Mua hàng thành công! Nhân viên sẽ liên lạc trong vòng 10 phút";
+                $_SESSION["message"]="Mua hàng thành công! Nhân viên sẽ liên lạc trong vòng 10 phút";
             }
             if($optAddress==2){
                 $query = $conn->prepare("update customers set address=:_address where id=:_id");
@@ -123,5 +125,12 @@
             $_SESSION["countcart"]-=1;
 		}
 
+		//hua hoa don
+		public function modelCancel($id){
+			$customer_id=isset($_SESSION["customer_id"])?$_SESSION["customer_id"]:0;
+			//lay bien ket noi
+			$conn = Connection::getInstance();
+			$conn->query("update orders set status=2 where id=$id and customer_id=$customer_id");
+		}
 	}
  ?>

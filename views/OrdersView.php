@@ -3,7 +3,7 @@
 $_SESSION['url']=$_SERVER["REQUEST_URI"];
 ?>
 <div class="col"  style="margin-top:100px;"> 
-<?php if(isset($_SESSION['customer_id'])&&$_SESSION['countcart']>0):?>
+<?php if(isset($_SESSION['customer_id'])):?>
     <div class="row " style="margin-bottom:5px;">
         <div class="tab_title reviews_title">
             <h4>Lịch sử giao dịch</h4>
@@ -18,23 +18,26 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                 <th style="width: 50px;">Số lượng</th>
                 <th>Giá bán(VNĐ)</th>
             </tr>
-            <?php  foreach($data as $rows): ?>
+            <?php  foreach($data as $rows): if($rows->status!=2):?>
             <tr class="table-danger">   
                 <h5>
                     <td>Mã hóa đơn: <?php echo $rows->id;?> </td>
                     <td>
-                        Trạng thái:
-                        <?php 
-                            if($rows->status==0){
-                                echo 'Chưa giao hàng.';
-                            }elseif($rows->status==1){
-                                echo 'Đã giao hàng.';
-                                $date = Date_create($rows->datepay);
-                                echo '<br/> Ngày giao hàng: '.Date_format($date, "d/m/Y");
-                            }else{
-                                echo 'Đơn bị hủy';
-                            }
-                        ?>
+                        <div class="float-left">
+                            Trạng thái:
+                            <?php 
+                                if($rows->status==0){
+                                    echo 'Chưa giao hàng.';
+                                    if($rows->datepay=="0000-00-00") echo '<br/> Chưa thanh toán ';
+                                }elseif($rows->status==1){
+                                    echo 'Đã giao hàng.';
+                                    $date = Date_create($rows->datepay);
+                                    echo '<br/> Ngày giao hàng: '.Date_format($date, "d/m/Y");
+                                }else{
+                                    echo 'Đơn bị hủy';
+                                }
+                            ?>
+                        </div>
                     </td>
                     <td colspan="2">
                             Thành tiền: <?php echo number_format($rows->price-$rows->saleprice).' ₫<br/>';?>
@@ -72,7 +75,7 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                 
                 ?> ₫ </td>
             </tr>
-            <?php endif; endforeach;endforeach; ?>
+            <?php endif; endforeach;endif;endforeach; ?>
         </table>
         <div class="col-12">
             <div class="col-12 col-lg-6 float-right p-2">
@@ -108,7 +111,7 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                         </tr>
                         <tr class="p-3"> 
                             <td class="p-2">
-                                <h5>Tất cả:</h5>
+                                <h5>Thành tiền: </h5>
                             </td>
                             <td class="p-2">
                                 <h5>
@@ -122,12 +125,11 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                 </table>        
             </div>
         </div>
-
     <?php else:?>
         <div class="col vh-100 cart-empty" style="margin-top:100px;"> 
             <div class="m-auto ">
-                <h4 class="font-italic mt-2 h-100">Bạn cần đăng nhập để có thể mua hàng!
-                    <a href="index.php?controller=login&action=login">Đăng nhập</a>
+                <h4 class="font-italic mt-2 h-100">Không có sản phẩm nào đã mua!
+                    <a href="index.php">Về trang chủ</a>
                 </h4>
             </div>
         </div>

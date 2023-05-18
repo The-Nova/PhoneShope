@@ -11,13 +11,19 @@ if(isset($_SESSION['customer_id'])){
 			$this->loadView("OrdersView.php",["data"=>$data,"dataDetail"=>$dataDetail]);
 		}
 
-		//createPost
+		//mua san pham
 		public function buyProducts(){
 			$this->modelCreateOrder();
 			header("location:index.php?controller=orders");
 		}
 
-
+		//mua san pham
+		public function cancel(){
+			$id=isset($_GET["id"])?$_GET["id"]:0;
+			$this->modelCancel($id);
+			$_SESSION['message']="Hủy hóa đơn thành công";
+			header("location:index.php?controller=orders");
+		}
 	}
 }else{
 	trait OrdersModel{}

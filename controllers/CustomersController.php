@@ -17,7 +17,7 @@
 		public function updatePost(){
 			$id = isset($_GET["id"])&&is_numeric($_GET["id"])?$_GET["id"]:0;
 			$this->modelUpdate($id);
-			$_SESSION["success"]= " Cập nhật tài khoản thành công! ";
+			$_SESSION["message"]= " Cập nhật tài khoản thành công! ";
 			//quay tro lai mvc users
 			header("location:index.php?controller=home");
 		}
@@ -40,7 +40,7 @@
 				//huy error
 				unset($_SESSION["error"]);
 				$this->modelCreate();
-				$_SESSION["success"]= " Đăng kí thành công! ";
+				$_SESSION["message"]= " Đăng kí thành công! ";
 				//quay tro lai mvc home
 				header("location:index.php?controller=home");
 			}	

@@ -7,11 +7,6 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Orders detail</div>
         <div class="panel-body">
-            <!-- thong tin don hang -->
-            <?php 
-                $order = $this->modelGetOrders($id);
-                $customer = $this->modelGetCustomers($order->customer_id);
-             ?>
             <table class="table">
                 <tr>
                     <th style="width: 100px;">Họ tên</th>
@@ -79,7 +74,26 @@
                     <td style="text-align: center;"><?php if(isset($rows->quantity)) echo $rows->quantity; ?></td>
                 </tr>
                 <?php endforeach; ?>
-            </table>            
+            </table>     
+            <?php if($order->status==0):?>
+                <form method="post" action="">
+                    <table class="table border-0 table-hover">
+                        <tr>
+                            <td><div id="note" class="float-left"><input type="text" name="note" class="form-control" placeholder="Lý do hủy hóa đơn"></div></td>
+                            <td><div class="float-right"><a href="index.php?controller=orders&action=cancel&id=<?php echo $order->id;?>" 
+                            class="btn btn-warning" onclick="return window.confirm('Bạn chắc chắn hủy hóa đơn này?');">Hủy hóa đơn</a>
+                            </div></td>
+                        </tr>
+                    </table>
+                    
+                    
+                </form>
+            <?php endif;?>        
         </div>
     </div>
 </div>
+<script>
+    function cancelOrder(){
+        
+    }
+</script>

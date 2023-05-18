@@ -22,7 +22,7 @@
         </div>
         <div class=" col-md-1">
             <form class="form-inline my-2 my-lg-0" method="post" enctype="multipart/form-data" action="index.php?controller=orders&action=btnStatus&status=2">
-                <button class="btn btn-warning my-2 my-sm-0" type="submit" name="warning">Hủy hóa đơn</button>
+                <button class="btn btn-warning my-2 my-sm-0" type="submit" name="warning">Đơn bị hủy</button>
             </form>
         </div>    
         <div class=" col-md-4" style="float:right;">

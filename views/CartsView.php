@@ -100,13 +100,17 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                             Nhận tại cửa hàng
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check mr-5">
                         <input type="radio" class="form-check-input" id="radio4" name="opt" value="2" checked>
                         <label class="form-check-label" for="radio4">
                             Nhận tại nhà: 
                         </label>
-                        <input type="text" class="form-control ml-3 mr-5" name="address" 
+                        <input type="text" class="form-control ml-3" name="address" 
                         value="<?php echo $address->address;?>" placeholder="Địa chỉ nhận hàng" required>
+                    </div>
+                    <div class="form-group p-0 mr-4 row">
+                        <label for="exampleInputEmail1">Lưu ý:</label>
+                        <input type="text" name="note" class="form-control" id="exampleInputEmail1" placeholder="VD: Giao giờ hành chính,...">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 float-right p-2">

@@ -13,15 +13,15 @@
 <link rel="stylesheet" type="text/css" href="assets/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="assets/styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="assets/styles/responsive.css">
-<?php if(isset($_SESSION["success"])):?>
+<?php if(isset($_SESSION["message"])):?>
 	<script>
-		function thongbao() {
-		window.alert("<?php echo $_SESSION["success"];?>");
+		function message() {
+		window.alert("<?php echo $_SESSION["message"];?>");
 		}
 	</script>
 <?php endif;?>
 </head>
-<body class="h-100" style="background-image:url(assets/images/bg_1.png);bottom:0;" <?php if(isset($_SESSION["success"])) {echo 'onload="thongbao()"';unset($_SESSION["success"]);}?>>
+<body class="h-100" style="background-image:url(assets/images/bg_1.png);bottom:0;" <?php if(isset($_SESSION["message"])) {echo 'onload="message()"';unset($_SESSION["message"]);}?>>
 
 <div class="super_container container h-100">
 	<!-- Header -->

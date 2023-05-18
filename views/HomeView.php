@@ -112,7 +112,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ hàng</a></div>
+								<div class="red_button add_to_cart_button"><a href="index.php?controller=products&action=productDetail&id=<?php echo $products->id ?>">Thêm vào giỏ hàng</a></div>
 							</div>
 						<?php endforeach;?>
 						<!--<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div> -->
@@ -181,7 +181,7 @@
 							<?php foreach($dataBestSeller as $bestseller):?>
 
 							<div class="owl-item product_slider_item border">
-								<div class="product-item" style="width: 20%;height:360px;">
+								<div class="product-item" style="width: 20%;">
 									<div class="product discount">
 										<div class="product_image">
 											<?php if(file_exists("assets/upload/products/".$bestseller->photo)): ?>

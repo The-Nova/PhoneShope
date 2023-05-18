@@ -6,11 +6,12 @@
     <div class="panel-body">
         <table class="table table-bordered table-hover">
             <tr>
+                <th style="width:100px;">Mã hóa đơn</th>
                 <th>Họ tên</th>
                 <th>Số điện thoại</th>
-                <th>Ngày giao hoặc Ngày hủy</th>
-                <th>Ngày tạo</th>
-                <th>Tổng giá</th>
+                <th style="width:120px;">Ngày thanh toán</th>
+                <th style="width:100px;">Ngày mua</th>
+                <th>Tổng giá trị</th>
                 <th style="width:150px; text-align: center;">Trạng thái</th>
                 <th style="width:150px;text-align: center;">Delivery</th>
             </tr>
@@ -20,16 +21,17 @@
                 $customer = $this->modelGetCustomers($rows->customer_id);
                 ?>
                 <tr>
+                    <td><?php echo $rows->id; ?></td>
                     <td><?php echo $customer->name; ?></td>
                     <td><?php echo $customer->phone; ?></td>
                     <td>
                     <?php 
-                    if($rows->datepay==0)
-                        $date = Date_create($rows->datecancel);
+                    if($rows->datepay=="0000-00-00")
+                        echo "Chưa thanh toán";
                     else { 
                         $date = Date_create($rows->datepay);
+                        echo Date_format($date, "d/m/Y");
                     }
-                    echo Date_format($date, "d/m/Y");
                     ?>                            
                 </td>
                 <td>
@@ -45,7 +47,7 @@
                         <?php elseif ($rows->status == 0) : ?>
                         <span class="label label-danger">Chưa giao hàng</span>
                     <?php else: ?>
-                        <span class="label label-warning">Hủy hóa đơn</span>
+                        <span class="label label-warning">Đơn bị hủy</span>
                         <?php endif; ?>
                     </td>
                     <td style="text-align: center;">

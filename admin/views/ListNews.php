@@ -28,7 +28,7 @@
             <td style="text-align:center;" >
                 <?php if($_SESSION["role"]<=$rows->roleaccept): ?>
                     <a href="index.php?controller=news&action=update&id=<?php echo $rows->id; ?>">Cập nhật</a>&nbsp;||
-                    <a href="index.php?controller=news&action=delete&id=<?php echo $rows->id; ?>" onclick="return window.confirm('Are you sure?');">Xóa</a>
+                    <a href="index.php?controller=news&action=delete&id=<?php echo $rows->id; ?>" onclick="return window.confirm('Chắc chắn xóa?');">Xóa</a>
                 <?php else :?>
                     <a href="index.php?controller=news&action=detailview&id=<?php echo $rows->id; ?>">Xem chi tiết</a>
                 <?php endif;?>
