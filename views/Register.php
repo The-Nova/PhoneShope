@@ -41,7 +41,7 @@
                 </div>
                  
                   <div class="d-flex justify-content-center">
-                    <input id="btn_submit" type="submit" value="Tạo tài khoản" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                    <input id="btn_submit" type="submit" value="Đăng kí" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                   </div>
 
                   <p class="text-center text-muted mt-5 mb-0">Bạn đã có tài khoản? <a href="index.php?controller=login&action=login"
