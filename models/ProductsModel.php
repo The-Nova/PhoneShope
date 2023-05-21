@@ -223,7 +223,7 @@
 		}
 
         //lay danh sach cac ban ghi, co phan trang tim kiem
-		public function modelReadSearch($recordPerPage){			
+		public function modelReadSearch(){			
 			$name=isset($_GET["category_name"])?$_GET["category_name"]:'';
 			if(!empty($_GET["search"])){
 				$keyword = $_GET["search"];

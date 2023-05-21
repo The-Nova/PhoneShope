@@ -491,7 +491,7 @@ jQuery(document).ready(function($)
 					var numFilter = ':nth-child(-n+' + numSortingText + ')';
     				$('.product-grid').isotope({filter: numFilter });
 					if(num>=$('.product-grid').length) {
-						document.getElementById("num_sorting_btn").type="hidden"; 
+						//document.getElementById("num_sorting_btn").type="hidden"; 
 					}
 					else {
 						document.getElementById("num_sorting_btn").type="button"; 
