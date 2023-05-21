@@ -50,7 +50,7 @@
 			$conn = Connection::getInstance();
 			if(empty($color)){
 				if($category_name==0&&empty($price)){
-					$query = $conn->query("select * from products order by createdate desc limit 15");
+					$query = $conn->query("select * from products order by createdate desc ");
 				}elseif($category_name==0&&!empty($price)){
 					$query = $conn->query("select * from products where $queryPrice order by createdate desc");
 				}elseif($category_name!=0&&empty($price)){
@@ -224,11 +224,7 @@
 
         //lay danh sach cac ban ghi, co phan trang tim kiem
 		public function modelReadSearch($recordPerPage){			
-			//lay bien page truyen tu url
-			$page = isset($_GET["page"])&&is_numeric($_GET["page"])&&$_GET["page"]>0 ? $_GET["page"]-1 : 0;
 			$name=isset($_GET["category_name"])?$_GET["category_name"]:'';
-			//lay tu ban ghi nao
-			$from = $page * $recordPerPage;
 			if(!empty($_GET["search"])){
 				$keyword = $_GET["search"];
 			}else{
@@ -236,7 +232,7 @@
 			}
 			//lay bien ket noi
 			$conn = Connection::getInstance();
-			$query = $conn->query("select * from products where name like '%$keyword%' order by createdate desc limit $from,$recordPerPage ");
+			$query = $conn->query("select * from products where name like '%$keyword%' order by createdate desc");
 			//lay tat ca ket qua tra ve
 			$result = $query->fetchAll();
 			return $result;
