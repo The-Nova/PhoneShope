@@ -2,8 +2,8 @@
 	//load file layout.php vao day
 	$this->layoutPath = "Layout.php";
     $_SESSION["keyword"]="";
- ?>
- <div class="col-md-12">
+?>
+<div class="col-md-12">
     <?php if($_SESSION["role"]== 1||$_SESSION["role"]== 2):?>
     <div class="panel panel-primary">
         <div class="panel-heading">Thống kê hóa đơn</div>
@@ -20,11 +20,11 @@
                         <?php
                              if($rows->status==1) echo "Đã giao hàng";
                              if($rows->status==0) echo "Chưa giao hàng";
-                             if($rows->status==2) echo "Hủy đơn hàng";
+                             if($rows->status==2) echo "Đơn bị hủy";
                         ?>
                     </td>
-                    <td><?php echo $rows->size_status ?></td>
-                    <td><?php echo $rows->pricecount ?></td>
+                    <td><?php echo $rows->size_status; ?></td>
+                    <td><?php echo number_format($rows->pricecount );?> ₫</td>
                 </tr>
                 <?php endforeach; ?>
             </table>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <?php endif;?>
-     <div class="panel panel-primary">
+    <div class="panel panel-primary">
         <div class="panel-heading">Thống kê</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover">
@@ -79,7 +79,7 @@
                                 <?php
                                     if($rows->status==1) echo "Đã giao hàng (VND)";
                                     if($rows->status==0) echo "Chưa giao hàng (VND)";
-                                    if($rows->status==2) echo "Hủy đơn hàng (VND)";
+                                    if($rows->status==2) echo "Đơn bị hủy (VND)";
                                 ?>
                             </td>
                             <?php
@@ -94,11 +94,11 @@
                                     if($valuebillyear=='') {$valuebillyear=0;}
                                     if($valuebilltotal=='') {$valuebilltotal=0;}
                                 ?>
-                            <td><?php echo $valuebilldate; ?></td>
-                            <td><?php echo $valuebillmonth; ?></td>
-                            <td><?php echo $valuebillmonthn; ?></td>
-                            <td><?php echo $valuebillyear; ?></td>
-                            <td><?php echo $valuebilltotal; ?></td>
+                            <td><?php echo number_format($valuebilldate); ?> ₫</td>
+                            <td><?php echo number_format($valuebillmonth); ?> ₫</td>
+                            <td><?php echo number_format($valuebillmonthn); ?> ₫</td>
+                            <td><?php echo number_format($valuebillyear); ?> ₫</td>
+                            <td><?php echo number_format($valuebilltotal); ?> ₫</td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif;?>
@@ -125,6 +125,48 @@
                 .pagination{padding:0px; margin:0px;}
             </style>
         </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Danh sách sản phẩm bán chạy</div>
+            <div class="panel-body">
+                <table class="table table-bordered table-hover">
+                <tr>
+                <th>STT</th>
+                <th style="width: 100px;">Ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th >Giá gốc (VND)</th>
+                <th style="width: 80px;">Giảm giá(%)</th>
+                <th style="width: 80px;">Số lượng đã bán</th>
+                <th style="width: 50px;">Hot</th>
+                <th>Ngày thêm</th>
+            </tr>
+            <?php $i=1; foreach($dataBestSale as $products): ?>
+            <tr>
+                <td><?php echo $i;$i=$i+1;?></td>
+                <td style="text-align: center;">
+                    <?php if(file_exists("../assets/upload/products/".$products->photo)): ?>
+                    <img src="../assets/upload/products/<?php echo $products->photo; ?>" style="width: 100px;">
+                    <?php endif; ?>
+                </td>
+                <td><?php echo $products->name ?>
+                </td>
+                <td style="text-align: center;"><?php echo number_format($products->price); ?> ₫</td>
+                <td style="text-align: center;"><?php echo $products->discount; ?></td>
+                <td style="text-align: center;"><?php echo $products->sumcount; ?></td>
+                <td style="text-align: center;"><?php if($products->hot==1): ?><span class="fa fa-check"></span><?php endif; ?></td>
+                <td style="text-align: center;">
+                    <?php 
+                        $date = Date_create($products->createdate);
+                        echo Date_format($date, "d/m/Y");
+                    ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+                </table>
+                <style type="text/css">
+                    .pagination{padding:0px; margin:0px;}
+                </style>
+            </div>
         </div>
     </div>
  </div>

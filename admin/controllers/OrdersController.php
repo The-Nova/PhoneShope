@@ -4,7 +4,7 @@
 		use OrdersModel;
 		public function index(){
 			//quy dinh so ban ghi tren mot trang
-			$recordPerPage = 25;
+			$recordPerPage = 20;
 			//tinh so trang
 			$numPage = ceil($this->modelTotal()/$recordPerPage);
 			//goi ham de lay du lieu
@@ -36,7 +36,7 @@
 		//danh sach cac product dang tim
 		public function btnSearch(){
 			//quy dinh so ban ghi mot trang
-			$recordPerPage = 10;
+			$recordPerPage = 20;
 			//lay danh sach cac ban ghi co phan trang
 			$listRecord = $this->modelReadSearch($recordPerPage);
 			//tinh so trang
@@ -49,7 +49,7 @@
 		//danh sach cac product dang loc theo ngay
 		public function btnFilterDate(){
 			//quy dinh so ban ghi mot trang
-			$recordPerPage = 10;
+			$recordPerPage = 20;
 			//lay danh sach cac ban ghi co phan trang
 			$listRecord = $this->modelReadFillter($recordPerPage);
 			//tinh so trang
@@ -62,7 +62,7 @@
 		//danh sach cac product dang loc theo ngay
 		public function btnStatus(){
 			//quy dinh so ban ghi mot trang
-			$recordPerPage = 10;
+			$recordPerPage = 20;
 			//lay danh sach cac ban ghi co phan trang
 			$listRecord = $this->modelReadStatus($recordPerPage);
 			//tinh so trang

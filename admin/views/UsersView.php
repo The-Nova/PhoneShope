@@ -26,7 +26,7 @@
                         } elseif ($rows->role== 2) {
                             echo "Chăm sóc khách hàng";
                         } else {
-                            echo "Quản lý khác";
+                            echo "Nhân viên bán hàng";
                         } ?></td>
                     <td><?php echo Date_format(Date_create($rows->createdate), "d/m/Y"); ?></td>
                     <td style="text-align:center;">

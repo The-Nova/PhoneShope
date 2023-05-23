@@ -52,15 +52,15 @@
                             } elseif ($record->role== 2) {
                                 echo "Chăm sóc khách hàng";
                             } else {
-                                echo "Quản lý khác";
+                                echo "Nhân viên bán hàng";
                             } ?>
                         </option>
                     <?php endif;?>
                     <?php if($record->role!= 2&&$record->role!= 1):?>
-                        <option value="2">Quản lý khách hàng</option>
+                        <option value="2">Chăm sóc khách hàng</option>
                     <?php endif;?>
                     <?php if($record->role!= 3&&$record->role!= 1):?>
-                        <option value="3">Quản lý khác</option>
+                        <option value="3">Nhân viên bán hàng</option>
                     <?php endif;?>
                     </select>
                 </div>

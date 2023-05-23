@@ -69,13 +69,24 @@
             //ham rowCount: dem so ket qua tra ve
 			return $query->rowCount();
         }
-        //ham lay datatheo nam
+        //ham lay data theo nam
         public function modeldatayear($year,$table){
             //lay bien ket noi
 			$conn = Connection::getInstance();
             $query = $conn->query("select * FROM $table where year(createdate)='$year'");
             //ham rowCount: dem so ket qua tra ve
 			return $query->rowCount();
+        }
+        //ham lay san pham ban chay
+        public function modelBestseller(){
+            //lay bien ket noi
+			$conn = Connection::getInstance();
+            $query = $conn->query("select p.id as id,p.hot as hot,p.name as name,p.photo as photo,p.price as price,p.discount as discount,
+            sum(orderdetails.quantity) as sumcount,p.createdate as createdate FROM products p,types,orderdetails WHERE orderdetails.type_id=types.id 
+            AND p.id=types.product_id GROUP BY types.product_id ORDER by sumcount DESC LIMIT 20");
+            //lay ket qua tra ve
+            $result = $query->fetchAll();
+            return $result;
         }
         
     }

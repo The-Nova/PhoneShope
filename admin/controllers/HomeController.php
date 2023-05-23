@@ -13,8 +13,9 @@
 			unset($_SESSION["error"]);
 			//lay danh sach cac ban ghi
 			$databil = $this->modelstatusBill();
+			$dataBestSale=$this->modelBestseller();
 			//goi view, truyen du lieu ra view
-			$this->loadView("HomeView.php",["databil"=>$databil]);
+			$this->loadView("HomeView.php",["databil"=>$databil,"dataBestSale"=>$dataBestSale]);
 		}
 	}
  ?>

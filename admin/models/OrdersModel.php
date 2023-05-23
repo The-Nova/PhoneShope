@@ -3,12 +3,12 @@
 		//ham liet ke danh sach cac ban ghi, co phan trang
 		public function modelRead($recordPerPage){
 			//lay so trang hien tai truyen tu url
-			$page = isset($_GET["p"]) && $_GET["p"] > 0 ? $_GET["p"]-1 : 0;
+			$page = isset($_GET["page"]) && $_GET["page"] > 0 ? $_GET["page"]-1 : 0;
 			//lay tu ban ghi nao
 			$from = $page * $recordPerPage;
 			//thuc hien truy van
 			$conn = Connection::getInstance();
-			$query = $conn->query("select * from orders order by id,status desc limit $from, $recordPerPage");
+			$query = $conn->query("select * from orders order by id,status desc limit $from,$recordPerPage");
 			//tra ve tat ca cac ban truy van duoc
 			$result = $query->fetchAll();
 			return $result;
@@ -16,7 +16,7 @@
 		//ham liet ke danh sach cac ban ghi, co phan trang tim kiem
 		public function modelReadSearch($recordPerPage){
 			//lay so trang hien tai truyen tu url
-			$page = isset($_GET["p"]) && $_GET["p"] > 0 ? $_GET["p"]-1 : 0;
+			$page = isset($_GET["page"]) && $_GET["page"] > 0 ? $_GET["page"]-1 : 0;
 			//lay tu ban ghi nao
 			$from = $page * $recordPerPage;
 			if(!empty($_REQUEST['search'])){
@@ -36,7 +36,7 @@
 		//ham liet ke danh sach cac ban ghi, co phan trang loc theo ngay
 		public function modelReadFillter($recordPerPage){
 			//lay so trang hien tai truyen tu url
-			$page = isset($_GET["p"]) && $_GET["p"] > 0 ? $_GET["p"]-1 : 0;
+			$page = isset($_GET["page"]) && $_GET["page"] > 0 ? $_GET["page"]-1 : 0;
 			//lay tu ban ghi nao
 			$from = $page * $recordPerPage;
 			if(!empty($_REQUEST['filter'])){
@@ -54,7 +54,7 @@
 		//ham liet ke danh sach cac ban ghi, co phan trang loc theo trang thai
 		public function modelReadStatus($recordPerPage){
 			//lay so trang hien tai truyen tu url
-			$page = isset($_GET["p"]) && $_GET["p"] > 0 ? $_GET["p"]-1 : 0;
+			$page = isset($_GET["page"]) && $_GET["page"] > 0 ? $_GET["page"]-1 : 0;
 			//lay tu ban ghi nao
 			$from = $page * $recordPerPage;
 			if(!empty($_REQUEST['status'])){
