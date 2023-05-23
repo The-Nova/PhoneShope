@@ -125,7 +125,7 @@
             $_SESSION["countcart"]-=1;
 		}
 
-		//hua hoa don
+		//huy hoa don
 		public function modelCancel($id){
 			$customer_id=isset($_SESSION["customer_id"])?$_SESSION["customer_id"]:0;
 			//lay bien ket noi

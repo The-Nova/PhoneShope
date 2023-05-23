@@ -35,6 +35,13 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                 <td style="text-align: center;"><div id="price_<?php echo $i;?>">
                 <?php echo number_format($rows->price); ?> ₫</div> </td>
                 <td>
+                    <?php if($rows->type_quantity<$rows->quantity):?>
+                        <div class="row mb-2">
+                            <div class="col text-danger text-left">
+                                *Số lượng trong kho không đủ(<?php echo $rows->quantity; ?>)
+                            </div>
+                        </div>
+                    <?php else:?>
                     <div class="input-group-prepend ">
                         <?php if($rows->quantity==1):?>
                             <button  id="minus_<?php echo $i=$i+1;?>" disabled class="btn btn-outline-secondary font-weight-bold" type="button">-</button>
@@ -52,6 +59,7 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                         </a>
                         <?php endif;?>
                     </div>
+                    <?php endif;?>
                 </td>
                 <td style="text-align: center;"><div id="price_<?php echo $i;?>">
                 <?php
@@ -106,7 +114,7 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                             Nhận tại nhà: 
                         </label>
                         <input type="text" class="form-control ml-3" name="address" 
-                        value="<?php echo $address->address;?>" placeholder="Địa chỉ nhận hàng" required>
+                        value="<?php echo $address->address;?>" placeholder="Địa chỉ nhận hàng">
                     </div>
                     <div class="form-group p-0 mr-4 row">
                         <label for="exampleInputEmail1">Lưu ý:</label>
@@ -158,9 +166,11 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                             </tr>
                             <tr class="p-3" >
                                 <td colspan="2">
-                                    <div class="d-flex justify-content-center mt-2">
-                                        <input type="submit" value="Mua hàng" class="btn btn-outline-info btn-lg btn-block"/>
-                                    </div>
+                                    <?php foreach($data as $rows): if($rows->type_quantity>=$rows->quantity):?>
+                                        <div class="d-flex justify-content-center mt-2">
+                                            <input type="submit" value="Mua hàng" class="btn btn-outline-info btn-lg btn-block"/>
+                                        </div>
+                                    <?php endif; endforeach;?>
                                 </td>
                             </tr>
                         </tbody>

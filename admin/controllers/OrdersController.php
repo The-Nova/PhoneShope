@@ -71,5 +71,13 @@
 			//goi view, truyen du lieu ra view
 			$this->loadView("OrdersView.php",["listRecord"=>$listRecord,"numPage"=>$numPage]);
 		}
+
+		//huy hoa don san pham
+		public function cancel(){
+			$id=isset($_GET["id"])?$_GET["id"]:0;
+			$this->modelCancel($id);
+			$_SESSION['message']="Hủy hóa đơn thành công";
+			header("location:index.php?controller=orders");
+		}
 	}
  ?>

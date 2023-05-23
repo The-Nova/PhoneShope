@@ -17,7 +17,7 @@ if(isset($_SESSION['customer_id'])){
 			header("location:index.php?controller=orders");
 		}
 
-		//mua san pham
+		//huy hoa don san pham
 		public function cancel(){
 			$id=isset($_GET["id"])?$_GET["id"]:0;
 			$this->modelCancel($id);

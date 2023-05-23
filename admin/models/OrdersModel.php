@@ -167,5 +167,12 @@
 			return $query->fetchAll();
 			//---
 		}
+
+		//huy hoa don
+		public function modelCancel($id){
+			//lay bien ket noi
+			$conn = Connection::getInstance();
+			$conn->query("update orders set status=2 where id=$id ");
+		}
 	}
  ?>

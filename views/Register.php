@@ -12,7 +12,11 @@
               <h2 class="text-uppercase text-center mb-5">Đăng kí</h2>
 
               <form method="post" action="<?php echo $action; ?>" onsubmit="return checkPass()" id="myform">
-
+                <div class="row mb-2">
+                  <div class="col text-danger text-left">
+                    <?php if(isset($_SESSION["error"]) && !empty($_SESSION["error"])) echo $_SESSION["error"]; ?>
+                  </div>
+                </div>
                 <div class="form-outline mb-4">
                   <input type="email" value="<?php echo isset($record->email)?$record->email:""; ?>" name="email" class="form-control" required/>
                   <label class="form-label" >Email</label>

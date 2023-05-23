@@ -119,9 +119,17 @@
 							<ul>Lọc theo:
 								<?php for($i=6;$i>=1;$i--):?>
 									<?php if($i>5){
-										echo '<li><a href="'. $action.'&star=0">Tất cả</a></li>';
+										if(!isset($_GET['star'])||$_GET['star']==0){
+											echo '<li class="bg-warning"><a href="'. $action.'&star=0">Tất cả</a></li>';
+										}else{
+											echo '<li><a href="'. $action.'&star=0">Tất cả</a></li>';
+										}
 									}else{
-										echo '<li><a href="'.$action.'&star='.$i.'">'.$i.' sao</a></li>';
+										if(isset($_GET['star'])&&$_GET['star']==$i){
+											echo '<li class="bg-warning"><a href="'.$action.'&star='.$i.'">'.$i.' sao</a></li>';
+										}else{
+											echo '<li><a href="'.$action.'&star='.$i.'">'.$i.' sao</a></li>';
+										}
 									}?>
 								<?php endfor;?>
 							</ul>
