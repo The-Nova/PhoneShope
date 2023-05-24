@@ -3,8 +3,12 @@
 	$this->layoutPath = "Layout.php";
     $_SESSION["keyword"]="";
 ?>
-<a href="index.php?controller=home&action=printReport"><input class="btn btn-info" type="button" value="In báo cáo"></a>
 <div class="col-md-12">
+    <div class="col-12">
+        <a href="index.php?controller=home&action=printReport" class="float-right ">
+            <input class="btn btn-info float-right " type="button" value="Xuất báo cáo">
+        </a>
+    </div>
     <?php if($_SESSION["role"]== 1||$_SESSION["role"]== 2):?>
     <div class="panel panel-primary">
         <div class="panel-heading">Thống kê hóa đơn</div>
