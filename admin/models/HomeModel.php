@@ -95,21 +95,38 @@
         //ham ghi file excel
         public function handle()
         {
+            $date= date("y-m-d");
+            $tablecustomers='customers';
+            $tableorders='orders';
+            $tablenews='news';
+            $tableproducts='products';
+            $year=date("20y");
+            $month=date("m");
             // Bước 1: 
             // Lấy dữ liệu từ database
             $data = array(
                 array(
-                    'TheHalfheart@gmail.com', 'Nguyễn Văn Cường'
+                    'Khách hàng mới', $this->modelTotal($tablecustomers),0
                 ),
                 array(
-                    'freetuts.net@gmail.com', 'Nguyễn Văn Cường'
+                    'Hóa đơn mới', $this->modelTotal($tableorders),0
                 ),
                 array(
-                    'mrcuong.winter@gmail.com', 'Nguyễn Văn Cường'
+                    'Hóa đơn chưa giao',0, $this->modelTotalPrice(0)->pricecount
                 ),
                 array(
-                    'ok_drt@yahoo.com', 'Nguyễn Văn Cường'
+                    'Hóa đơn đã giao',0, $this->modelTotalPrice(1)->pricecount
+                ),
+                array(
+                    'Hóa đơn bị hủy',0, $this->modelTotalPrice(2)->pricecount
+                ),
+                array(
+                    'Sản phẩm mới', $this->modelTotal($tableproducts),0
+                ),
+                array(
+                    'Tin tức mới', $this->modelTotal($tablenews),0
                 )
+
             );
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
@@ -117,10 +134,9 @@
                 // Tạo tiêu đề
                 $sheet
                     ->setCellValue('A1', 'STT')
-                    ->setCellValue('B1', 'ID')
-                    ->setCellValue('C1', 'Tên')
-                    ->setCellValue('D1', 'Ngày đăng')
-                    ->setCellValue('E1', 'Người đăng');
+                    ->setCellValue('B1', 'Mục')
+                    ->setCellValue('C1', 'Số lượng')
+                    ->setCellValue('D1', 'Giá trị (VND)');
                 
                 // Ghi dữ liệu
                 $rowNumber = 2;
@@ -134,6 +150,9 @@
                 
                     // C1, C2, C3, ...
                     $sheet->setCellValue('C' . $rowNumber, $item[1]);
+
+                    // D1, D2, D3, ...
+                    $sheet->setCellValue('D' . $rowNumber, $item[2]);
                     
                     // Tăng row lên để khỏi bị lưu đè
                     $rowNumber++;

@@ -4,7 +4,7 @@
     $_SESSION["keyword"]="";
 ?>
 <div class="col-md-12">
-    <div class="col-12">
+    <div class="col-12" style="margin-bottom: 10px;">
         <a href="index.php?controller=home&action=printReport" class="float-right ">
             <input class="btn btn-info float-right " type="button" value="Xuất báo cáo">
         </a>
