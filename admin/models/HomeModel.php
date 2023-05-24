@@ -1,4 +1,7 @@
 <?php
+    require '../assets/phpexcel/vendor/autoload.php';
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
     trait HomeModel{
         //ham tinh tong so ban ghi
 		public function modelTotal($table){
@@ -89,5 +92,58 @@
             return $result;
         }
         
+        //ham ghi file excel
+        public function handle()
+        {
+            // Bước 1: 
+            // Lấy dữ liệu từ database
+            $data = array(
+                array(
+                    'TheHalfheart@gmail.com', 'Nguyễn Văn Cường'
+                ),
+                array(
+                    'freetuts.net@gmail.com', 'Nguyễn Văn Cường'
+                ),
+                array(
+                    'mrcuong.winter@gmail.com', 'Nguyễn Văn Cường'
+                ),
+                array(
+                    'ok_drt@yahoo.com', 'Nguyễn Văn Cường'
+                )
+            );
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            
+                // Tạo tiêu đề
+                $sheet
+                    ->setCellValue('A1', 'STT')
+                    ->setCellValue('B1', 'ID')
+                    ->setCellValue('C1', 'Tên')
+                    ->setCellValue('D1', 'Ngày đăng')
+                    ->setCellValue('E1', 'Người đăng');
+                
+                // Ghi dữ liệu
+                $rowNumber = 2;
+                foreach ($data as $index => $item) 
+                {
+                    // A1, A2, A3, ...
+                    $sheet->setCellValue('A' . $rowNumber, ($index + 1));
+                    
+                    // B1, B2, B3, ...
+                    $sheet->setCellValue('B' . $rowNumber, $item[0]);
+                
+                    // C1, C2, C3, ...
+                    $sheet->setCellValue('C' . $rowNumber, $item[1]);
+                    
+                    // Tăng row lên để khỏi bị lưu đè
+                    $rowNumber++;
+                }
+                // Xuất file
+                $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+                $writer->setOffice2003Compatibility(true);
+                $filename=time().".xlsx";
+                $writer->save($filename);
+                header("location:".$filename);
+        }     
     }
 ?>

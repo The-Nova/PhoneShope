@@ -3,6 +3,7 @@
 	$this->layoutPath = "Layout.php";
     $_SESSION["keyword"]="";
 ?>
+<a href="index.php?controller=home&action=printReport"><input class="btn btn-info" type="button" value="In báo cáo"></a>
 <div class="col-md-12">
     <?php if($_SESSION["role"]== 1||$_SESSION["role"]== 2):?>
     <div class="panel panel-primary">

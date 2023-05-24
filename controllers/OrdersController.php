@@ -13,7 +13,12 @@ if(isset($_SESSION['customer_id'])){
 
 		//mua san pham
 		public function buyProducts(){
-			$this->modelCreateOrder();
+			if($this->checkQuantity()){
+				$this->modelCreateOrder();
+				$_SESSION["message"]="Mua hàng thành công! Nhân viên sẽ liên lạc trong vòng 10 phút";
+			}else{
+				$_SESSION["message"]="Mua hàng thất bại! Số lượng trong kho không đủ!";
+			}
 			header("location:index.php?controller=orders");
 		}
 

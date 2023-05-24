@@ -35,7 +35,7 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                 <td style="text-align: center;"><div id="price_<?php echo $i;?>">
                 <?php echo number_format($rows->price); ?> ₫</div> </td>
                 <td>
-                    <?php if($rows->type_quantity<$rows->quantity):?>
+                    <?php if($rows->type_quantity<$rows->quantity):$checkQuantity=false;?>
                         <div class="row mb-2">
                             <div class="col text-danger text-left">
                                 *Số lượng trong kho không đủ(<?php echo $rows->quantity; ?>)
@@ -166,11 +166,11 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                             </tr>
                             <tr class="p-3" >
                                 <td colspan="2">
-                                    <?php foreach($data as $rows): if($rows->type_quantity>=$rows->quantity):?>
+                                    <?php if(!isset($checkQuantity)):?>
                                         <div class="d-flex justify-content-center mt-2">
                                             <input type="submit" value="Mua hàng" class="btn btn-outline-info btn-lg btn-block"/>
                                         </div>
-                                    <?php endif; endforeach;?>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         </tbody>

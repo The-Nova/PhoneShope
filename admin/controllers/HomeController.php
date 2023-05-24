@@ -17,5 +17,10 @@
 			//goi view, truyen du lieu ra view
 			$this->loadView("HomeView.php",["databil"=>$databil,"dataBestSale"=>$dataBestSale]);
 		}
+
+		public function printReport(){
+			$this->handle();
+			header('localtion:index.php');
+		}
 	}
  ?>

@@ -33,8 +33,8 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                                     echo 'Đã giao hàng.';
                                     $date = Date_create($rows->datepay);
                                     echo '<br/> Ngày giao hàng: '.Date_format($date, "d/m/Y");
-                                }else{
-                                    echo 'Đơn bị hủy';
+                                }elseif($rows->status==2){
+                                    echo 'Đơn bị hủy.';
                                 }
                             ?>
                         </div>

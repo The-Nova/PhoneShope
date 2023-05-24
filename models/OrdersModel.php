@@ -95,6 +95,12 @@
             $query = $conn->prepare("insert into orders set customer_id=:_customer_id,price=:_price,saleprice=:_saleprice,note=:_note,createdate=:_createdate");
             $query->execute([":_customer_id"=>$customer_id,":_price"=>$sumprice,":_saleprice"=>$saleprice,":_note"=>$note,":_createdate"=>$createdate]);
             $order_id=$conn->lastInsertId();
+			if($optAddress==2){
+                $query = $conn->prepare("update customers set address=:_address where id=:_id");
+                $query->execute([":_address"=>$address,":_id"=>$customer_id]);
+				$query = $conn->prepare("update orders set status=3 where id=:_id");
+                $query->execute([":_id"=>$order_id]);
+            }
             foreach($dataProduct as $rows){
                 $type_id=$rows->type_id;
                 $quantity=$rows->quantity;
@@ -108,14 +114,26 @@
                 $query->execute([":_quantity"=>$quantity,":_id"=>$type_id]);
                 //xoa gio hang
                 $this->modelDelete($rows->id);
-                $_SESSION["message"]="Mua hàng thành công! Nhân viên sẽ liên lạc trong vòng 10 phút";
-            }
-            if($optAddress==2){
-                $query = $conn->prepare("update customers set address=:_address where id=:_id");
-                $query->execute([":_address"=>$address,":_id"=>$customer_id]);
-            }
-				
+            }	
 		}
+
+		//kiem tra so luong trong kho
+		public function checkQuantity(){
+            $dataProduct=$this->modelReadCarts();
+			$conn = Connection::getInstance();
+			$count=0;
+			foreach($dataProduct as $rows){
+				$quantity=$rows->quantity;
+				$type_id=$rows->type_id;
+				$query = $conn->query("select quantity from types where id=$type_id");
+				$type_quantity=$query->fetch()->quantity;
+				if($quantity>$type_quantity){
+					$count+=1;
+				}
+			}
+			if($count==0) return true; else return false;
+		}
+
 		//xoa ban ghi
 		public function modelDelete($id){
 			$customer_id=isset($_SESSION["customer_id"])?$_SESSION["customer_id"]:0;
