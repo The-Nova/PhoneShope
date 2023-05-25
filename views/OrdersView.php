@@ -32,12 +32,17 @@ $_SESSION['url']=$_SERVER["REQUEST_URI"];
                                 }elseif($rows->status==1){
                                     echo 'Đã giao hàng.';
                                     $date = Date_create($rows->datepay);
-                                    echo '<br/> Ngày giao hàng: '.Date_format($date, "d/m/Y");
+                                    echo '<br/> Ngày thanh toán: '.Date_format($date, "d/m/Y");
                                 }elseif($rows->status==2){
                                     echo 'Đơn bị hủy.';
                                 }
                             ?>
                         </div>
+                        <?php if($rows->status==0):?>
+                            <div class="float-right">
+                                    <a href="index.php?controller=orders&action=cancel&id=<?php echo $rows->id;?>"><input class="btn btn-warning" type="button" value="Hủy hóa đơn"></a>
+                            </div>
+                        <?php endif;?>
                     </td>
                     <td colspan="2">
                             Thành tiền: <?php echo number_format($rows->price-$rows->saleprice).' ₫<br/>';?>

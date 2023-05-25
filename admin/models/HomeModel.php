@@ -160,7 +160,7 @@
                 // Xuất file
                 $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
                 $writer->setOffice2003Compatibility(true);
-                $filename=time().".xlsx";
+                $filename='Báo cáo ngày '.date("d-m-Y").time().".xlsx";
                 $writer->save($filename);
                 header("location:".$filename);
         }     

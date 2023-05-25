@@ -146,9 +146,10 @@
 		//huy hoa don
 		public function modelCancel($id){
 			$customer_id=isset($_SESSION["customer_id"])?$_SESSION["customer_id"]:0;
+			$date=date("Y-m-d");
 			//lay bien ket noi
 			$conn = Connection::getInstance();
-			$conn->query("update orders set status=2 where id=$id and customer_id=$customer_id");
+			$conn->query("update orders set status=2,datecancel='$date' where id=$id and customer_id=$customer_id");
 		}
 	}
  ?>

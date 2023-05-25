@@ -9,24 +9,24 @@
         <div class="panel-body">
             <table class="table">
                 <tr>
-                    <th style="width: 100px;">Họ tên</th>
+                    <th style="width: 100px;">Họ tên:</th>
                     <td><?php echo $customer->name; ?></td>
                 </tr>
                 <tr>
-                    <th style="width: 100px;">Địa chỉ</th>
+                    <th style="width: 100px;">Địa chỉ:</th>
                     <td><?php echo $customer->address; ?></td>
                 </tr>
                 <tr>
-                    <th style="width: 100px;">Điện thoại</th>
+                    <th style="width: 100px;">Điện thoại:</th>
                     <td><?php echo $customer->phone; ?></td>
                 </tr>
                 <tr>
-                    <th style="width: 100px;">Ngày đặt</th>
+                    <th style="width: 100px;">Ngày mua:</th>
                     <td><?php echo Date_format(Date_create($order->createdate), "d/m/Y"); ?></td>
                 </tr>
                 <?php if($order->status == 2): ?>
                     <tr>
-                        <th style="width: 100px;">Ngày hủy</th>
+                        <th style="width: 100px;">Ngày hủy:</th>
                         <td><?php echo Date_format(Date_create($order->datecancel), "d/m/Y"); ?></td>
                     </tr>
                 <?php endif; ?>
@@ -75,25 +75,20 @@
                 </tr>
                 <?php endforeach; ?>
             </table>     
-            <?php if($order->status==0):?>
-                <form method="post" action="">
+            <?php if($order->status==0||$order->note==0):?>
+                <form method="post" action="index.php?controller=orders&action=cancel&id=<?php echo $order->id;?>">
                     <table class="table border-0 table-hover">
                         <tr>
                             <td><div id="note" class="float-left"><input type="text" name="note" class="form-control" placeholder="Lý do hủy hóa đơn"></div></td>
-                            <td><div class="float-right"><a href="index.php?controller=orders&action=cancel&id=<?php echo $order->id;?>" 
-                            class="btn btn-warning" onclick="return window.confirm('Bạn chắc chắn hủy hóa đơn này?');">Hủy hóa đơn</a>
-                            </div></td>
+                            <td>
+                                <div class="float-right">
+                                    <input type="submit" class="btn btn-warning" value="Hủy hóa đơn" onclick="return window.confirm('Bạn chắc chắn hủy hóa đơn này?');">
+                                </div>
+                            </td>
                         </tr>
                     </table>
-                    
-                    
                 </form>
             <?php endif;?>        
         </div>
     </div>
 </div>
-<script>
-    function cancelOrder(){
-        
-    }
-</script>

@@ -8,7 +8,7 @@
 			$from = $page * $recordPerPage;
 			//thuc hien truy van
 			$conn = Connection::getInstance();
-			$query = $conn->query("select * from orders order by id,status desc limit $from,$recordPerPage");
+			$query = $conn->query("select * from orders order by id desc limit $from,$recordPerPage");
 			//tra ve tat ca cac ban truy van duoc
 			$result = $query->fetchAll();
 			return $result;
@@ -170,9 +170,11 @@
 
 		//huy hoa don
 		public function modelCancel($id){
+			$note=empty($_POST['note'])?0:$_POST['note'];
+			$date=date("Y-m-d");
 			//lay bien ket noi
 			$conn = Connection::getInstance();
-			$conn->query("update orders set status=2 where id=$id ");
+			$conn->query("update orders set status=2,note='$note',datecancel='$date' where id=$id ");
 		}
 	}
  ?>
