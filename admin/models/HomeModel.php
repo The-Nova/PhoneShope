@@ -128,41 +128,79 @@
                 )
 
             );
+            $dataBestSaller=$this->modelBestseller();
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
             
-                // Tạo tiêu đề
-                $sheet
-                    ->setCellValue('A1', 'STT')
-                    ->setCellValue('B1', 'Mục')
-                    ->setCellValue('C1', 'Số lượng')
-                    ->setCellValue('D1', 'Giá trị (VND)');
+            // Tạo tiêu đề
+            $sheet
+                ->setCellValue('A1', 'STT')
+                ->setCellValue('B1', 'Mục')
+                ->setCellValue('C1', 'Số lượng')
+                ->setCellValue('D1', 'Giá trị (VND)');
+            
+            // Ghi dữ liệu
+            $rowNumber = 2;
+            foreach ($data as $index => $item) 
+            {
+                // A1, A2, A3, ...
+                $sheet->setCellValue('A' . $rowNumber, ($index + 1));
                 
-                // Ghi dữ liệu
-                $rowNumber = 2;
-                foreach ($data as $index => $item) 
-                {
-                    // A1, A2, A3, ...
-                    $sheet->setCellValue('A' . $rowNumber, ($index + 1));
-                    
-                    // B1, B2, B3, ...
-                    $sheet->setCellValue('B' . $rowNumber, $item[0]);
-                
-                    // C1, C2, C3, ...
-                    $sheet->setCellValue('C' . $rowNumber, $item[1]);
+                // B1, B2, B3, ...
+                $sheet->setCellValue('B' . $rowNumber, $item[0]);
+            
+                // C1, C2, C3, ...
+                $sheet->setCellValue('C' . $rowNumber, $item[1]);
 
-                    // D1, D2, D3, ...
-                    $sheet->setCellValue('D' . $rowNumber, $item[2]);
-                    
-                    // Tăng row lên để khỏi bị lưu đè
-                    $rowNumber++;
-                }
-                // Xuất file
-                $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-                $writer->setOffice2003Compatibility(true);
-                $filename='Báo cáo ngày '.date("d-m-Y").time().".xlsx";
-                $writer->save($filename);
-                header("location:".$filename);
+                // D1, D2, D3, ...
+                $sheet->setCellValue('D' . $rowNumber, $item[2]);
+                
+                // Tăng row lên để khỏi bị lưu đè
+                $rowNumber++;
+            }
+
+            $spreadsheet->createSheet();
+            $sheet2 = $spreadsheet->setActiveSheetIndex(1);
+            
+            // Tạo tiêu đề
+            $sheet2
+                ->setCellValue('A1', 'STT')
+                ->setCellValue('B1', 'Tên sản phẩm')
+                ->setCellValue('C1', 'Giá gốc')
+                ->setCellValue('D1', 'Giảm giá(%)')
+                ->setCellValue('E1', 'Số lượng')
+                ->setCellValue('F1', 'Giá trị (VND)');
+            
+            // Ghi dữ liệu
+            $rowNumber = 2;
+            $i=0;
+            foreach ($dataBestSaller as $index => $item) 
+            {
+                // A1, A2, A3, ...
+                $sheet2->setCellValue('A' . $rowNumber, ($i=$i+ 1));
+                
+                // B1, B2, B3, ...
+                $sheet2->setCellValue('B' . $rowNumber, $item->name);
+            
+                // C1, C2, C3, ...
+                $sheet2->setCellValue('C' . $rowNumber, $item->price);
+
+                // D1, D2, D3, ...
+                $sheet2->setCellValue('D' . $rowNumber, $item->discount);
+
+                $sheet2->setCellValue('E' . $rowNumber, $item->sumcount);
+
+                $sheet2->setCellValue('F' . $rowNumber, round($item->price*(100-$item->discount)/100,-3)*$item->sumcount);
+                
+                // Tăng row lên để khỏi bị lưu đè
+                $rowNumber++;
+            }
+            // Xuất file
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet,'thống kê chung');
+            $writer->setOffice2003Compatibility(true);
+            $filename='Báo cáo ngày '.date("d-m-Y").'-'.time().".xlsx";
+            $writer->save($filename);
+            header("location:".$filename);
         }     
     }
 ?>
