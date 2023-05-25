@@ -191,6 +191,7 @@
                             if (distance < 0) {
                                 clearInterval(x);
                                 document.getElementById("demo").innerHTML = "Phiên làm việc đã hết hạn";
+                                document.getElementById("report").innerHTML = "";
                             }
                         }, 1000);
                     </script>
