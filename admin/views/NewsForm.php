@@ -13,7 +13,7 @@
         <form method="post" enctype="multipart/form-data" action="<?php echo $action; ?>">
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Name</div>
+                <div class="col-md-2">Tiêu đề</div>
                 <div class="col-md-10">
                     <input type="text" value="<?php echo isset($record->name)?$record->name:""; ?>" name="name" class="form-control" required>
                 </div>
@@ -21,7 +21,7 @@
             <!-- end rows -->            
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Descripition</div>
+                <div class="col-md-2">Tóm tắt</div>
                 <div class="col-md-10">
                     <textarea name="description" id="description">
                         <?php echo isset($record->description)?$record->description:""; ?>
@@ -34,7 +34,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Content</div>
+                <div class="col-md-2">Nội dung</div>
                 <div class="col-md-10">
                     <textarea name="content" id="content">
                         <?php echo isset($record->content)?$record->content:""; ?>
@@ -55,7 +55,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Upload image</div>
+                <div class="col-md-2">Ảnh</div>
                 <div class="col-md-10">
                     <input type="file" name="photo">
                 </div>

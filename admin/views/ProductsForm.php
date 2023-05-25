@@ -19,7 +19,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Name</div>
+                <div class="col-md-2">Tên sản phẩm</div>
                 <div class="col-md-10">
                     <input type="text" value="<?php echo isset($record->name)?$record->name:""; ?>" name="name" class="form-control" required>
                 </div>
@@ -27,7 +27,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Price</div>
+                <div class="col-md-2">Giá gốc</div>
                 <div class="col-md-10">
                     <input type="text" value="<?php echo isset($record->price)?$record->price:""; ?>" name="price" class="form-control" required>
                 </div>
@@ -35,7 +35,7 @@
             <!-- end rows -->  
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">% Discount</div>
+                <div class="col-md-2">Giảm giá(%)</div>
                 <div class="col-md-10">
                     <input type="number" min="0" max="100" value="<?php echo isset($record->discount)?$record->discount:""; ?>" name="discount" class="form-control" required>
                 </div>
@@ -43,7 +43,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Category</div>
+                <div class="col-md-2">Danh mục</div>
                 <div class="col-md-10">
                 <select class="form-control" style="width: 250px;" name="category_id">
                     <?php $categories = $this->modelListCategories(); ?>
@@ -60,7 +60,7 @@
             <!-- end rows -->          
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Descripition</div>
+                <div class="col-md-2">Cấu hình</div>
                 <div class="col-md-10">
                     <textarea name="description" id="description">
                         <?php echo isset($record->description)?$record->description:""; ?>
@@ -73,7 +73,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Content</div>
+                <div class="col-md-2">Giới thiệu</div>
                 <div class="col-md-10">
                     <textarea name="content" id="content">
                         <?php echo isset($record->content)?$record->content:""; ?>
@@ -94,7 +94,7 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Upload image</div>
+                <div class="col-md-2">Ảnh</div>
                 <div class="col-md-10">
                     <input type="file" name="photo">
                 </div>

@@ -130,7 +130,7 @@
 			<div class="row align-items-center">
 				<div class="col-lg-5">
 					<div class="deal_ofthe_week_img">
-						<img src="assets/images/14.jpg" alt="">
+						<img src="assets/images/9.jpg" alt="">
 					</div>
 				</div>
 				<div class="col-lg-7 text-right deal_ofthe_week_col">

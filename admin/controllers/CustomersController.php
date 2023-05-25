@@ -7,7 +7,7 @@
 		//liet ke so ban ghi
 		public function index(){
 			//quy dinh so ban ghi mot trang
-			$recordPerPage = 10;
+			$recordPerPage = 20;
 			//tinh so trang
 			//ham ceil la ham lay tran. VD: ceil(2.1) = 3
 			$numPage = ceil($this->modelTotal()/$recordPerPage);
@@ -42,7 +42,7 @@
 		//danh sach cac product dang tim
 		public function btnSearch(){
 			//quy dinh so ban ghi mot trang
-			$recordPerPage = 10;
+			$recordPerPage = 20;
 			//lay danh sach cac ban ghi co phan trang
 			$data = $this->modelReadSearch($recordPerPage);
 			//tinh so trang
@@ -54,7 +54,7 @@
 		//danh sach cac product dang loc theo ngay
 		public function btnFilterDate(){
 			//quy dinh so ban ghi mot trang
-			$recordPerPage = 10;
+			$recordPerPage = 20;
 			//lay danh sach cac ban ghi co phan trang
 			$data = $this->modelReadFillter($recordPerPage);
 			//tinh so trang
